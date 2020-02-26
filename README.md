@@ -1,12 +1,13 @@
 # call_js_from_php
 
-This library provide a class to run javascript functions from php.
+This library is basically a php wrapper around nodejs.
+It provides a class to run javascript functions from php.
 The javscript source is loaded from a js file, and it is run executing
-nodejs (`proc_open`).
+nodejs with `proc_open()`.
 
 ## Usage
 
-In your javascript source, you have to exports the functions you want
+In your javascript source, you have to export the functions you want
 to access from php, e.g.:
 
 ```
@@ -18,7 +19,7 @@ module.exports = {
   my_sum: my_sum
 };
 ```
-*my_lib.js*
+*./my_lib.js*
 
 Then, you can call the function from php in this way:
 
@@ -34,8 +35,13 @@ echo $js_my_lib->call('my_sum', [ 'n1' => 10, 'n2' => 5 ]);
 
 ?>
 ```
-*demo.php*
+*./demo.php*
 
 ## Dependencies
 
 * nodejs
+
+## Known issues
+
+* For now, the javascript functions accepts a single argument.
+  If you need to pass multiple arguments, you could use an object.
